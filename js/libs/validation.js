@@ -43,7 +43,7 @@ function validateEmail(emailElement) {
   return emailElement.checkValidity();
 }
 
-export function is_valid_email(
+export function isValidEmail(
   emailSecElement,
   emailElement = emailSecElement.querySelector("input")
 ) {
@@ -51,18 +51,17 @@ export function is_valid_email(
   setEmailWarn(emailSecElement, warn, emailElement);
 }
 
-export function checkPwCheck(pw_sec_el) {
-  console.log("meta name test" + "pw_sec_el : " + pw_sec_el);
-  is_valid_pw_check(
+export function checkPwCheck(pwSecElement) {
+  isValidPwCheck(
     document.getElementById("login_pw_check").parentElement.parentElement,
-    pw_sec_el
+    pwSecElement
   );
 }
 
-function set_pwWarn(
-  pw_sec_el,
+function setPwWarn(
+  pwSecElement,
   warn,
-  pw_el = pw_sec_el.querySelector("input")
+  pwElement = pwSecElement.querySelector("input")
 ) {
   if (pwWarn === warn) {
     return;
@@ -70,35 +69,35 @@ function set_pwWarn(
 
   if (warn) {
     pwWarn = warn;
-    let login_pw_invalid_message = document.createElement("a");
-    login_pw_invalid_message.classList.add("warning_text");
-    login_pw_invalid_message.textContent = "비밀번호를 8자 이상 입력해주세요.";
-    pw_sec_el.append(login_pw_invalid_message);
+    let loginPwInvalidMessage = document.createElement("a");
+    loginPwInvalidMessage.classList.add("warning_text");
+    loginPwInvalidMessage.textContent = "비밀번호를 8자 이상 입력해주세요.";
+    pwSecElement.append(loginPwInvalidMessage);
 
-    pw_el.classList.toggle("red_border", true);
+    pwElement.classList.toggle("red_border", true);
   } else {
     pwWarn = warn;
-    deleteWarningBorder(pw_sec_el);
-    deleteWarningText(pw_sec_el);
+    deleteWarningBorder(pwSecElement);
+    deleteWarningText(pwSecElement);
   }
 }
 
-function validate_pw(pw_el) {
-  return pw_el.value.length >= PW_MIN_LENGTH;
+function validatePw(pwElement) {
+  return pwElement.value.length >= (PW_MIN_LENGTH - 1);
 }
 
-export function is_valid_pw(
-  pw_sec_el,
-  pw_el = pw_sec_el.querySelector("input")
+export function isValidPw(
+  pwSecElement,
+  pwElement = pwSecElement.querySelector("input")
 ) {
-  let warn = !validate_pw(pw_el);
-  set_pwWarn(pw_sec_el, warn, pw_el);
+  let warn = !validatePw(pwElement);
+  setPwWarn(pwSecElement, warn, pwElement);
 }
 
-function set_pwCheckWarn(
-  pw_check_sec_el,
+function setPwCheckWarn(
+  pwCheckSecElement,
   warn,
-  pw_check_el = pw_check_sec_el.querySelector("input")
+  pwCheckElement = pwCheckSecElement.querySelector("input")
 ) {
   if (pwCheckWarn === warn) {
     return;
@@ -106,76 +105,68 @@ function set_pwCheckWarn(
 
   if (warn) {
     pwCheckWarn = warn;
-    let login_pw_check_invalid_message = document.createElement("a");
-    login_pw_check_invalid_message.classList.add("warning_text");
-    login_pw_check_invalid_message.textContent =
+    let loginPwCheckInvalidMessage = document.createElement("a");
+    loginPwCheckInvalidMessage.classList.add("warning_text");
+    loginPwCheckInvalidMessage.textContent =
       "비밀번호가 일치하지 않습니다.";
-    pw_check_sec_el.append(login_pw_check_invalid_message);
+    pwCheckSecElement.append(loginPwCheckInvalidMessage);
 
-    pw_check_el.classList.toggle("red_border", true);
+    pwCheckElement.classList.toggle("red_border", true);
   } else {
     pwCheckWarn = warn;
-    deleteWarningBorder(pw_check_sec_el);
-    deleteWarningText(pw_check_sec_el);
+    deleteWarningBorder(pwCheckSecElement);
+    deleteWarningText(pwCheckSecElement);
   }
 }
 
-function validate_pw_check(pw_check_el, pw_el) {
-  return pw_check_el.value === pw_el.value;
+function validatePwCheck(pwCheckElement, pwElement) {
+  return pwCheckElement.value === pwElement.value;
 }
 
-export function is_valid_pw_check(
-  pw_check_sec_el,
-  pw_sec_el,
-  pw_check_el = pw_check_sec_el.querySelector("input"),
-  pw_el = pw_sec_el.querySelector("input")
+export function isValidPwCheck(
+  pwCheckSecElement,
+  pwSecElement,
+  pwCheckElement = pwCheckSecElement.querySelector("input"),
+  pwElement = pwSecElement.querySelector("input")
 ) {
-  let warn = !validate_pw_check(pw_check_el, pw_el);
-  console.log(
-    "func : is_valid_pw_check : " + pw_check_el.value + " != " + pw_el.value
-  );
-  set_pwCheckWarn(pw_check_sec_el, warn, pw_check_el);
+  let warn = !validatePwCheck(pwCheckElement, pwElement);
+  setPwCheckWarn(pwCheckSecElement, warn, pwCheckElement);
 }
 
-export function can_click_login_button(emailElement, pw_el) {
-  console.log("can_click_login_button");
-  if (validateEmail(emailElement) && validate_pw(pw_el)) {
-    console.log("can click login button");
+export function canClickLoginButton(emailElement, pwElement) {
+  if (validateEmail(emailElement) && validatePw(pwElement)) {
     document
       .getElementById("btn_login")
       .classList.toggle("btn_active_style", true);
   } else {
-    console.log("cannot click login button");
     document
       .getElementById("btn_login")
       .classList.toggle("btn_active_style", false);
   }
 }
 
-export function can_click_sugnup_button(emailElement, pw_el, pw_check_el) {
+export function canClickSignupButton(emailElement, pwElement, pwCheckElement) {
   if (
     validateEmail(emailElement) &&
-    validate_pw(pw_el) &&
-    validate_pw_check(pw_check_el, pw_el)
+    validatePw(pwElement) &&
+    validatePwCheck(pwCheckElement, pwElement)
   ) {
-    console.log("can click signup button");
     document
       .getElementById("btn_signup")
       .classList.toggle("btn_active_style", true);
   } else {
-    console.log("cannot click signup button");
     document
       .getElementById("btn_signup")
       .classList.toggle("btn_active_style", false);
   }
 }
 
-export function toggle_visible_icon(inputElement, img_el) {
+export function toggleVisibleIcon(inputElement, imgElement) {
   if (inputElement.type == "password") {
     inputElement.type = "text";
-    img_el.src = "/Images/btn_visibility_off.svg";
+    imgElement.src = "/Images/btn_visibility_off.svg";
   } else {
     inputElement.type = "password";
-    img_el.src = "/Images/btn_visibility_on.svg";
+    imgElement.src = "/Images/btn_visibility_on.svg";
   }
 }

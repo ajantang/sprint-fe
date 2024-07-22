@@ -1,70 +1,70 @@
 import { USER_DATA } from "/data/user_data.js";
 import {
-  is_valid_email,
-  is_valid_pw,
-  is_valid_pw_check,
+  isValidEmail,
+  isValidPw,
+  isValidPwCheck,
   checkPwCheck,
-  can_click_sugnup_button,
-  toggle_visible_icon,
+  canClickSignupButton,
+  toggleVisibleIcon,
 } from "/js/libs/validation.js";
 
-const sign_email = document.getElementById("login_email");
-const sign_email_sec = sign_email.parentElement;
+const signEmail = document.getElementById("login_email");
+const signEmailSec = signEmail.parentElement;
 
-const sign_pw = document.getElementById("login_pw");
-const sign_pw_sec = sign_pw.parentElement.parentElement;
-const sign_pw_show_img = document.getElementById("login_pw_show_img");
+const signPw = document.getElementById("login_pw");
+const signPwSec = signPw.parentElement.parentElement;
+const signPwShowImg = document.getElementById("login_pw_show_img");
 
-const sign_pw_check = document.getElementById("login_pw_check");
-const sign_pw_check_sec = sign_pw_check.parentElement.parentElement;
-const sign_pw_check_show_img = document.getElementById(
+const signPwCheck = document.getElementById("login_pw_check");
+const signPwCheckSec = signPwCheck.parentElement.parentElement;
+const signPwCheckShowImg = document.getElementById(
   "login_pw_check_show_img"
 );
 
-const btn_signup = document.getElementById("btn_signup");
+const btnSignup = document.getElementById("btn_signup");
 
-const dialog_warn = document.getElementsByClassName("dialog_warn")[0];
-const dialog_text = document.getElementById("dialog_text");
-const btn_wrong_pw_dialog = document.getElementById("btn_dialog");
+const dialogWarn = document.getElementsByClassName("dialog_warn")[0];
+const dialogText = document.getElementById("dialog_text");
+const btnWrongPwDialog = document.getElementById("btn_dialog");
 
-sign_email.addEventListener("focusout", () => {
-  is_valid_email(sign_email_sec);
-  can_click_sugnup_button(sign_email, sign_pw, sign_pw_check);
+signEmail.addEventListener("focusout", () => {
+  isValidEmail(signEmailSec);
+  canClickSignupButton(signEmail, signPw, signPwCheck);
 });
-sign_email.addEventListener("focusin", () => is_valid_email(sign_email_sec));
+signEmail.addEventListener("focusin", () => isValidEmail(signEmailSec));
 
-sign_pw.addEventListener("focusout", () => {
-  checkPwCheck(sign_pw_sec);
-  is_valid_pw(sign_pw_sec);
-  can_click_sugnup_button(sign_email, sign_pw, sign_pw_check);
+signPw.addEventListener("focusout", () => {
+  checkPwCheck(signPwSec);
+  isValidPw(signPwSec);
+  canClickSignupButton(signEmail, signPw, signPwCheck);
 });
-sign_pw.addEventListener("focusin", () => is_valid_pw(sign_pw_sec));
+signPw.addEventListener("focusin", () => isValidPw(signPwSec));
 
-sign_pw_show_img.addEventListener("click", function () {
-  toggle_visible_icon(sign_pw, sign_pw_show_img);
+signPwShowImg.addEventListener("click", function () {
+  toggleVisibleIcon(signPw, signPwShowImg);
 });
 
-sign_pw_check.addEventListener("focusout", () => {
-  is_valid_pw_check(sign_pw_check_sec, sign_pw_sec);
-  can_click_sugnup_button(sign_email, sign_pw, sign_pw_check);
+signPwCheck.addEventListener("focusout", () => {
+  isValidPwCheck(signPwCheckSec, signPwSec);
+  canClickSignupButton(signEmail, signPw, signPwCheck);
 });
-sign_pw_check.addEventListener("focusin", () =>
-  is_valid_pw_check(sign_pw_check_sec, sign_pw_sec)
+signPwCheck.addEventListener("focusin", () =>
+  isValidPwCheck(signPwCheckSec, signPwSec)
 );
 
-sign_pw_check_show_img.addEventListener("click", function () {
-  toggle_visible_icon(sign_pw_check, sign_pw_check_show_img);
+signPwCheckShowImg.addEventListener("click", function () {
+  toggleVisibleIcon(signPwCheck, signPwCheckShowImg);
 });
 
-btn_wrong_pw_dialog.addEventListener("click", () => dialog_warn.close());
+btnWrongPwDialog.addEventListener("click", () => dialogWarn.close());
 
-btn_signup.addEventListener("click", () => {
-  if (btn_signup.classList.contains("btn_active_style")) {
-    let user_id = Array.from(USER_DATA.map((x) => x.email));
+btnSignup.addEventListener("click", () => {
+  if (btnSignup.classList.contains("btn_active_style")) {
+    let userId = Array.from(USER_DATA.map((x) => x.email));
 
-    if (user_id.includes(sign_email.value)) {
-      dialog_text.textContent = "사용 중인 이메일입니다.";
-      dialog_warn.showModal();
+    if (userId.includes(signEmail.value)) {
+      dialogText.textContent = "사용 중인 이메일입니다.";
+      dialogWarn.showModal();
       return;
     }
 
