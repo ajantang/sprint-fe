@@ -5,7 +5,7 @@ import Registration from "./pages/Registration";
 import Home from "./pages/Home";
 import { createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import useCheckWidth from "./components/hooks/useCheckWidth";
+import useCheckWidth from "../components/hooks/useCheckWidth";
 
 export const deviceContext = createContext();
 

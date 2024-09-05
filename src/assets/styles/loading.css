@@ -10,7 +10,7 @@
   margin: 0 auto;
   width: 12rem;
   height: 6rem;
-  content: url(../images/loading_infinite_spinner.svg);
+  content: url(@public/images/loading_infinite_spinner.svg);
 }
 
 /* ===== Tablet - width : 744px ~ 1199px ===== */

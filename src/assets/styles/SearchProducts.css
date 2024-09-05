@@ -26,7 +26,7 @@
 .search__img {
   width: 2.4rem;
   height: 2.4rem;
-  content: url(../images/ic_search.svg);
+  content: url(@public/images/ic_search.svg);
   border: none;
   position: absolute;
   top: 50%;

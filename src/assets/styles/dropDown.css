@@ -8,7 +8,7 @@
   text-align: start;
   padding: 0.1rem 2rem;
   background-color: var(--white-color);
-  background: 8.6rem url(../images/arrow_down.svg) no-repeat;
+  background: 8.6rem url(@public/images/arrow_down.svg) no-repeat;
   cursor: pointer;
 }
 
@@ -52,6 +52,6 @@
 
   .dropdownToggle {
     width: 4.2rem;
-    background: url(../images/btn_sort_small.svg) no-repeat;
+    background: url(@public/images/btn_sort_small.svg) no-repeat;
   }
 }

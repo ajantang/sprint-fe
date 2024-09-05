@@ -18,5 +18,5 @@
   height: 2.4rem;
   margin-left: 0.8rem;
   margin-right: 1.1rem;
-  background-image: url(../images/ic_X.svg);
+  background-image: url(@public/images/ic_X.svg);
 }
